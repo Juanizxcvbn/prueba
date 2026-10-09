@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clases Particulares | Juani</title>
+  <meta name="description" content="Clases particulares online. Consultá por WhatsApp. Aceptamos pagos en Bitcoin.">
+  <style>
+    :root { --bg:#0b0f14; --card:#121922; --txt:#e6edf3; --muted:#8b98a5; --accent:#00e5ff; --btc:#f7931a; --wa:#25d366; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); line-height:1.6; }
+    .wrap { max-width:760px; margin:0 auto; padding:24px 18px 80px; }
+    header { text-align:center; padding:48px 0 32px; }
+    h1 { font-size:2rem; color:var(--accent); }
+    header p { color:var(--muted); margin-top:10px; }
+    section { background:var(--card); border:1px solid #1f2a36; border-radius:14px; padding:22px; margin-top:20px; }
+    h2 { font-size:1.2rem; margin-bottom:12px; }
+    ul { padding-left:20px; color:var(--muted); }
+    li { margin:6px 0; }
+    .btn { display:inline-block; padding:14px 22px; border-radius:10px; font-weight:700; text-decoration:none; border:none; cursor:pointer; font-size:1rem; }
+    .btn-wa { background:var(--wa); color:#04210f; }
+    .btn-copy { background:var(--btc); color:#1a1000; margin-top:10px; }
+    .addr { word-break:break-all; background:#0b0f14; border:1px dashed var(--btc); border-radius:8px; padding:12px; font-family:ui-monospace,Consolas,monospace; font-size:.9rem; }
+    .cta { text-align:center; margin-top:28px; }
+    .qr { display:block; max-width:200px; margin:14px auto 0; border-radius:8px; background:#fff; padding:8px; }
+    small { color:var(--muted); display:block; margin-top:10px; }
+    .float { position:fixed; right:16px; bottom:16px; background:var(--wa); color:#04210f; padding:14px 18px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,.5); }
+    footer { text-align:center; color:var(--muted); font-size:.85rem; margin-top:40px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Clases Particulares</h1>
+      <p>Aprendé a tu ritmo, con atención personalizada. Online.</p>
+    </header>
+
+    <div class="cta">
+      <a class="btn btn-wa"
+         href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quiero%20info%20sobre%20las%20clases"
+         target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
+    </div>
+
+    <section>
+      <h2>📚 Qué ofrezco</h2>
+      <ul>
+        <li>Clases individuales o grupos chicos</li>
+        <li>Modalidad online (Meet / Discord)</li>
+        <li>Primera consulta sin costo</li>
+        <li>Material y ejercicios incluidos</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>💰 Precios</h2>
+      <ul>
+        <li>Clase individual (1 h): <strong>USD XX</strong></li>
+        <li>Pack de 4 clases: <strong>USD XX</strong></li>
+      </ul>
+      <small>Precios en USD. Se abonan en pesos o en Bitcoin al valor del día del pago.</small>
+    </section>
+
+    <section>
+      <h2>₿ Pagá con Bitcoin</h2>
+      <p style="color:var(--muted);margin-bottom:12px;">Enviá el equivalente al precio acordado a esta dirección y mandame el comprobante por WhatsApp:</p>
+      <div class="addr" id="btc">TU_DIRECCION_BITCOIN_ACA</div>
+      <button class="btn btn-copy" onclick="copiar()">Copiar dirección</button>
+      <!-- Opcional: generá un QR de tu dirección, guardalo como qr.png y descomentá -->
+      <!-- <img class="qr" src="qr.png" alt="QR de la dirección Bitcoin"> -->
+      <small>Verificá siempre la dirección completa antes de enviar. Las transacciones en Bitcoin no se pueden revertir.</small>
+    </section>
+
+    <section>
+      <h2>❓ Cómo funciona</h2>
+      <ul>
+        <li>1. Me escribís por WhatsApp</li>
+        <li>2. Coordinamos día, horario y precio</li>
+        <li>3. Pagás y arrancamos</li>
+      </ul>
+    </section>
+
+    <footer>© 2026 Clases Particulares · Contacto por WhatsApp</footer>
+  </div>
+
+  <a class="float" href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quiero%20info%20sobre%20las%20clases" target="_blank" rel="noopener">💬 WhatsApp</a>
+
+  <script>
+    function copiar() {
+      const t = document.getElementById('btc').innerText;
+      navigator.clipboard.writeText(t).then(() => alert('Dirección copiada ✅'));
+    }
+  </script>
+</body>
+</html>
