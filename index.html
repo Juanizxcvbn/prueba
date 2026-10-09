@@ -3,90 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clases Particulares | Juani</title>
-  <meta name="description" content="Clases particulares online. Consultá por WhatsApp. Aceptamos pagos en Bitcoin.">
+  <title>Ruta de Pentesting | Juani</title>
+  <meta name="description" content="Clase única en Discord: una ruta estructurada para empezar en pentesting. Contacto por WhatsApp.">
   <style>
-    :root { --bg:#0b0f14; --card:#121922; --txt:#e6edf3; --muted:#8b98a5; --accent:#00e5ff; --btc:#f7931a; --wa:#25d366; }
+    :root { --bg:#07090d; --card:#0e131b; --txt:#e6edf3; --muted:#8b98a5; --cyan:#00e5ff; --mag:#ff2bd6; --usdt:#26a17b; --btc:#f7931a; --wa:#25d366; --warn:#ffcc00; }
     * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); line-height:1.6; }
-    .wrap { max-width:760px; margin:0 auto; padding:24px 18px 80px; }
-    header { text-align:center; padding:48px 0 32px; }
-    h1 { font-size:2rem; color:var(--accent); }
+    body { font-family:ui-monospace,"Fira Code",Consolas,monospace; background:var(--bg); color:var(--txt); line-height:1.6; }
+    .wrap { max-width:760px; margin:0 auto; padding:24px 18px 90px; }
+    header { text-align:center; padding:40px 0 24px; }
+    h1 { font-size:1.8rem; color:var(--cyan); text-shadow:0 0 12px rgba(0,229,255,.55); }
+    h1 span { color:var(--mag); text-shadow:0 0 12px rgba(255,43,214,.55); }
     header p { color:var(--muted); margin-top:10px; }
-    section { background:var(--card); border:1px solid #1f2a36; border-radius:14px; padding:22px; margin-top:20px; }
-    h2 { font-size:1.2rem; margin-bottom:12px; }
+    section { background:var(--card); border:1px solid #1b2633; border-left:3px solid var(--cyan); border-radius:10px; padding:22px; margin-top:20px; }
+    section.pay { border-left-color:var(--mag); }
+    h2 { font-size:1.1rem; margin-bottom:12px; color:var(--cyan); }
+    section.pay h2 { color:var(--mag); }
+    p.txt { color:var(--muted); }
     ul { padding-left:20px; color:var(--muted); }
     li { margin:6px 0; }
-    .btn { display:inline-block; padding:14px 22px; border-radius:10px; font-weight:700; text-decoration:none; border:none; cursor:pointer; font-size:1rem; }
-    .btn-wa { background:var(--wa); color:#04210f; }
-    .btn-copy { background:var(--btc); color:#1a1000; margin-top:10px; }
-    .addr { word-break:break-all; background:#0b0f14; border:1px dashed var(--btc); border-radius:8px; padding:12px; font-family:ui-monospace,Consolas,monospace; font-size:.9rem; }
-    .cta { text-align:center; margin-top:28px; }
-    .qr { display:block; max-width:200px; margin:14px auto 0; border-radius:8px; background:#fff; padding:8px; }
+    .btn { display:inline-block; padding:14px 22px; border-radius:8px; font-weight:700; text-decoration:none; border:none; cursor:pointer; font-size:1rem; font-family:inherit; }
+    .btn-wa { background:var(--wa); color:#04210f; box-shadow:0 0 14px rgba(37,211,102,.4); }
+    .btn-copy { background:var(--cyan); color:#00131a; margin-top:10px; }
+    .addr { word-break:break-all; background:#05070a; border:1px dashed var(--mag); border-radius:8px; padding:12px; font-size:.9rem; color:var(--txt); }
+    .cta { text-align:center; margin-top:24px; }
+    .price { font-size:2rem; color:var(--cyan); font-weight:700; }
+    .tag { display:inline-block; padding:3px 10px; border-radius:20px; font-size:.8rem; font-weight:700; margin:4px 6px 4px 0; }
+    .t-usdt { background:var(--usdt); color:#00150e; }
+    .t-btc { background:var(--btc); color:#1a1000; }
+    .warn { border:1px solid var(--warn); background:rgba(255,204,0,.07); border-radius:8px; padding:12px; margin:14px 0; color:var(--warn); font-size:.9rem; }
     small { color:var(--muted); display:block; margin-top:10px; }
-    .float { position:fixed; right:16px; bottom:16px; background:var(--wa); color:#04210f; padding:14px 18px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,.5); }
-    footer { text-align:center; color:var(--muted); font-size:.85rem; margin-top:40px; }
+    .gif { display:block; max-width:100%; height:auto; margin:0 auto 20px; border-radius:12px; }
+    .float { position:fixed; right:16px; bottom:16px; background:var(--wa); color:#04210f; padding:14px 18px; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:0 4px 14px rgba(0,0,0,.6); }
+    footer { text-align:center; color:var(--muted); font-size:.8rem; margin-top:40px; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1>Clases Particulares</h1>
-      <p>Aprendé a tu ritmo, con atención personalizada. Online.</p>
+      <img src="animacion.gif" alt="Animación" class="gif">
+      <h1>Ruta de <span>Pentesting</span></h1>
+      <p>Una clase única en Discord para arrancar con orden.</p>
     </header>
 
     <div class="cta">
       <a class="btn btn-wa"
-         href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quiero%20info%20sobre%20las%20clases"
+         href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quiero%20info%20sobre%20la%20clase%20de%20pentesting"
          target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
     </div>
 
     <section>
-      <h2>📚 Qué ofrezco</h2>
-      <ul>
-        <li>Clases individuales o grupos chicos</li>
-        <li>Modalidad online (Meet / Discord)</li>
-        <li>Primera consulta sin costo</li>
-        <li>Material y ejercicios incluidos</li>
-      </ul>
+      <h2>&gt; De qué se trata</h2>
+      <p class="txt">Una clase en mi Discord con una ruta estructurada para empezar en el pentesting. Te ahorrás meses de buscar información suelta: ya recorrí ese camino y te muestro el orden, las herramientas que realmente sirven y dónde practicar de forma legal.</p>
     </section>
 
     <section>
-      <h2>💰 Precios</h2>
+      <h2>&gt; Qué incluye</h2>
       <ul>
-        <li>Clase individual (1 h): <strong>USD XX</strong></li>
-        <li>Pack de 4 clases: <strong>USD XX</strong></li>
+        <li>Ruta de aprendizaje paso a paso para arrancar desde cero</li>
+        <li>Las herramientas que vas a usar y para qué sirve cada una</li>
+        <li>Plataformas de práctica legales (TryHackMe, HackTheBox, PortSwigger)</li>
+        <li>Clase en vivo en Discord, con espacio para preguntas</li>
       </ul>
-      <small>Precios en USD. Se abonan en pesos o en Bitcoin al valor del día del pago.</small>
+      <small>Contenido con fines educativos. Se practica solo en laboratorios o sistemas con autorización.</small>
     </section>
 
     <section>
-      <h2>₿ Pagá con Bitcoin</h2>
-      <p style="color:var(--muted);margin-bottom:12px;">Enviá el equivalente al precio acordado a esta dirección y mandame el comprobante por WhatsApp:</p>
-      <div class="addr" id="btc">TU_DIRECCION_BITCOIN_ACA</div>
+      <h2>&gt; Precio</h2>
+      <p class="price">USD 10</p>
+      <small>Clase única. Se abona en cripto o por acuerdo en WhatsApp.</small>
+    </section>
+
+    <section class="pay">
+      <h2>&gt; Pagá en cripto</h2>
+      <p class="txt">Red: <strong>BNB Smart Chain (BEP20)</strong></p>
+      <p style="margin-top:8px;">
+        <span class="tag t-usdt">USDT</span>
+        <span class="tag t-btc">BTCB (BTC en BEP20)</span>
+      </p>
+      <div class="warn">⚠️ Enviá <strong>solo por la red BEP20</strong>. Si mandás Bitcoin por la red BTC u otra red a esta dirección, los fondos se pierden. Las transacciones no se pueden revertir.</div>
+      <div class="addr" id="addr">0x70B330d176d40BA85dF884B48553601fCcFAbD16</div>
       <button class="btn btn-copy" onclick="copiar()">Copiar dirección</button>
-      <!-- Opcional: generá un QR de tu dirección, guardalo como qr.png y descomentá -->
-      <!-- <img class="qr" src="qr.png" alt="QR de la dirección Bitcoin"> -->
-      <small>Verificá siempre la dirección completa antes de enviar. Las transacciones en Bitcoin no se pueden revertir.</small>
+      <small>Después de pagar, mandame el comprobante por WhatsApp y te paso el acceso a la clase.</small>
     </section>
 
     <section>
-      <h2>❓ Cómo funciona</h2>
+      <h2>&gt; Cómo funciona</h2>
       <ul>
         <li>1. Me escribís por WhatsApp</li>
-        <li>2. Coordinamos día, horario y precio</li>
-        <li>3. Pagás y arrancamos</li>
+        <li>2. Pagás y me mandás el comprobante</li>
+        <li>3. Te paso el acceso al Discord y coordinamos la fecha de la clase</li>
       </ul>
     </section>
 
-    <footer>© 2026 Clases Particulares · Contacto por WhatsApp</footer>
+    <footer>© 2026 · Siempre Soñando Alto.</footer>
   </div>
 
-  <a class="float" href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quiero%20info%20sobre%20las%20clases" target="_blank" rel="noopener">💬 WhatsApp</a>
+  <a class="float" href="https://wa.me/549XXXXXXXXXX?text=Hola%2C%20quiero%20info%20sobre%20la%20clase%20de%20pentesting" target="_blank" rel="noopener">💬 WhatsApp</a>
 
   <script>
     function copiar() {
-      const t = document.getElementById('btc').innerText;
+      const t = document.getElementById('addr').innerText;
       navigator.clipboard.writeText(t).then(() => alert('Dirección copiada ✅'));
     }
   </script>
