@@ -1,85 +1,598 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="dark" lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ruta de Pentesting | Juani</title>
-  <meta name="description" content="Clase única en Discord: una ruta estructurada para empezar en pentesting.">
-  <style>
-    :root { --bg:#0a0a0a; --txt:#ededed; --muted:#8a8a8a; --line:#222; --accent:#00e5ff; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--txt); line-height:1.7; }
-    .wrap { max-width:560px; margin:0 auto; padding:64px 22px 100px; }
-    .gif { display:block; max-width:100%; height:auto; margin:0 0 32px; border-radius:8px; }
-    h1 { font-size:1.6rem; font-weight:600; letter-spacing:-.02em; }
-    .sub { color:var(--muted); margin-top:6px; }
-    section { border-top:1px solid var(--line); margin-top:36px; padding-top:28px; }
-    h2 { font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:500; margin-bottom:12px; }
-    p, li { color:#c8c8c8; }
-    ul { list-style:none; }
-    li { padding:4px 0; }
-    li::before { content:"— "; color:var(--muted); }
-    .price { font-size:2rem; font-weight:600; }
-    .btn { display:inline-block; padding:12px 22px; border-radius:6px; font-weight:600; text-decoration:none; font-size:.95rem; border:1px solid var(--txt); color:var(--bg); background:var(--txt); cursor:pointer; font-family:inherit; }
-    .btn-ghost { background:transparent; color:var(--txt); border-color:#333; margin-top:12px; }
-    .addr { font-family:ui-monospace,Consolas,monospace; font-size:.82rem; word-break:break-all; border:1px solid var(--line); border-radius:6px; padding:12px; color:var(--txt); margin-top:12px; }
-    .note { font-size:.82rem; color:var(--muted); margin-top:12px; }
-    .warn { font-size:.85rem; color:#d9b84a; margin-top:12px; }
-    footer { margin-top:56px; color:#555; font-size:.8rem; }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Clase de Pentesting desde cero · US$10 | juanicerouno</title>
+<meta name="description" content="Clase en Discord para empezar en Hacking Ético con una ruta clara de 6 pasos. US$10, pago único: envías por BEP20, mandas el comprobante por WhatsApp y agendas tu clase con Juan."/>
+<meta name="theme-color" content="#0d0e13"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Clase de Pentesting desde cero · US$10"/>
+<meta property="og:description" content="Una ruta clara en 6 pasos para empezar en Hacking Ético. Acceso en 3 pasos."/>
+<meta property="og:locale" content="es_ES"/>
+<link rel="icon" type="image/webp" href="assets/logo-juan.webp"/>
+<link rel="apple-touch-icon" href="assets/logo-juan.webp"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{
+  colors:{
+    "surface":"#121318","surface-bright":"#38393f",
+    "surface-container-lowest":"#0d0e13","surface-container-low":"#1a1b21","surface-container":"#1e1f25",
+    "surface-container-high":"#292a2f","surface-container-highest":"#34343a",
+    "on-surface":"#ece8f4","on-surface-variant":"#c4b8d6","outline-variant":"#4c3e58",
+    "primary":"#d066f6","primary-container":"#b000f0","primary-fixed-dim":"#9a12d6","on-primary-fixed":"#ffffff",
+    "secondary":"#f2c14e","secondary-fixed":"#e7c4ff","error":"#ffb4ab"
+  },
+  borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"9999px"},
+  spacing:{"space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","margin":"2rem","margin-mobile":"1rem"},
+  fontFamily:{"label-sm":["JetBrains Mono"],"label-md":["JetBrains Mono"],"label-lg":["JetBrains Mono"],"headline-xl":["Inter"],"headline-lg":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"body-sm":["Inter"]},
+  fontSize:{
+    "label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],
+    "label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],
+    "label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.05em","fontWeight":"600"}],
+    "headline-xl":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"800"}],
+    "headline-xl-mobile":["34px",{"lineHeight":"42px","letterSpacing":"-0.02em","fontWeight":"800"}],
+    "headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.025em","fontWeight":"700"}],
+    "headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"700"}],
+    "headline-md":["28px",{"lineHeight":"36px","letterSpacing":"-0.015em","fontWeight":"600"}],
+    "headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],
+    "body-lg":["18px",{"lineHeight":"28px","letterSpacing":"-0.005em","fontWeight":"400"}],
+    "body-md":["15px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],
+    "body-sm":["13px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"400"}]
+  }
+}}};
+</script>
+<style>
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;overscroll-behavior-y:none}
+  [id]{scroll-margin-top:5rem}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;line-height:1}
+  .icon-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+  details>summary{list-style:none;cursor:pointer}
+  details>summary::-webkit-details-marker{display:none}
+  details[open] .chevron{transform:rotate(180deg)}
+  .cta-glow{animation:glow 2.4s ease-out infinite}
+  @keyframes glow{0%{box-shadow:0 0 0 0 rgba(176,0,240,.45)}70%{box-shadow:0 0 0 14px rgba(176,0,240,0)}100%{box-shadow:0 0 0 0 rgba(176,0,240,0)}}
+  #sticky-cta{transform:translateY(110%);transition:transform .3s ease}
+  .term-pending [data-term-row]{display:none}
+  .term-caret::after{content:"";display:inline-block;width:.45rem;height:.85em;margin-left:.15rem;background:#b000f0;vertical-align:-.12em}
+  #sticky-cta.is-visible{transform:translateY(0)}
+  .cupo-mark{height:.55rem;border-radius:9999px;background:#4c3e58;transform-origin:left center}
+  .cupo-mark.is-on{background:#b000f0;animation:cupo-in .4s ease both}
+  .is-hidden{display:none!important}
+  @keyframes cupo-in{from{transform:scaleX(.15);opacity:.35}to{transform:scaleX(1);opacity:1}}
+  a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #d066f6;outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
 </head>
-<body>
-  <div class="wrap">
-    <img src="https://i.gifer.com/NZzo.gif" alt="" class="gif">
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-fixed">
 
-    <h1>Ruta de Pentesting</h1>
-    <p class="sub">Una clase única en Discord para arrancar con orden.</p>
+<svg aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+</svg>
 
-    <section>
-      <h2>De qué se trata</h2>
-      <p>Una ruta estructurada para empezar en el pentesting. Te ahorrás meses de buscar información suelta: te muestro el orden, las herramientas que sirven y dónde practicar de forma legal.</p>
-    </section>
-
-    <section>
-      <h2>Incluye</h2>
-      <ul>
-        <li>Ruta paso a paso desde cero</li>
-        <li>Herramientas y para qué sirve cada una</li>
-        <li>Práctica legal: TryHackMe, HackTheBox, PortSwigger</li>
-        <li>Clase en vivo en Discord</li>
-      </ul>
-      <p class="note">Contenido educativo. Se practica solo en laboratorios o sistemas autorizados.</p>
-    </section>
-
-    <section>
-      <h2>Precio</h2>
-      <p class="price">USD 10</p>
-      <p class="note">Clase única. Se abona en cripto o por acuerdo en WhatsApp.</p>
-    </section>
-
-    <section>
-      <h2>Pago en cripto</h2>
-      <p>USDT o BTCB · red <strong>BNB Smart Chain (BEP20)</strong></p>
-      <div class="addr" id="addr">0x70B330d176d40BA85dF884B48553601fCcFAbD16</div>
-      <button class="btn btn-ghost" onclick="copiar()">Copiar dirección</button>
-      <p class="warn">Enviá solo por red BEP20. Por otra red los fondos se pierden y no se pueden revertir.</p>
-      <p class="note">Después de pagar, mandame el comprobante por WhatsApp.</p>
-    </section>
-
-    <section>
-      <h2>Contacto</h2>
-      <a class="btn" href="https://wa.me/5491162488944?text=Hola%2C%20quiero%20info%20sobre%20la%20clase%20de%20pentesting" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-    </section>
-
-    <footer>© 2026 · Siempre Soñando Alto.</footer>
+<!-- HEADER -->
+<header class="fixed inset-x-0 top-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_12px_rgba(0,0,0,0.5)]">
+  <div class="h-16 max-w-[1200px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md">
+    <a class="flex items-center gap-space-sm min-w-0" href="#inicio" aria-label="Ir al inicio">
+      <img alt="" class="w-9 h-9 rounded-full object-cover shrink-0 ring-1 ring-primary-container/40" height="36" width="36" src="assets/logo-juan.webp"/>
+      <span class="flex flex-col min-w-0">
+        <span class="font-label-md text-label-md text-primary tracking-wider uppercase truncate">juanicerouno</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant truncate">CLASE PENTESTING · US$10</span>
+      </span>
+    </a>
+    <nav aria-label="Secciones" class="hidden md:flex items-center gap-space-lg">
+      <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#ruta">Ruta</a>
+      <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#pago">Cómo acceder</a>
+      <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors" href="#faq">FAQ</a>
+    </nav>
+    <a class="inline-flex items-center justify-center gap-space-xs h-10 px-space-md shrink-0 bg-primary-container text-on-primary-fixed font-label-md text-label-md uppercase tracking-wider rounded-lg transition-colors hover:bg-primary-fixed-dim" href="#pago">
+      <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>Acceder
+    </a>
   </div>
+</header>
 
-  <script>
-    function copiar() {
-      const t = document.getElementById('addr').innerText;
-      navigator.clipboard.writeText(t).then(() => alert('Dirección copiada ✅'));
+<main class="pt-16">
+
+  <!-- 1. HERO -->
+  <section id="inicio" class="relative overflow-hidden bg-surface-container-lowest">
+    <img alt="" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_right] opacity-50" src="assets/Fondo_hero_main.webp"/>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface-container-lowest/92 via-surface-container-lowest/75 to-surface-container-lowest/40"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-b from-surface-container-lowest/35 via-transparent to-surface-container-lowest"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full bg-primary-container/20 blur-3xl"></div>
+    <div class="relative z-10 max-w-[1200px] mx-auto px-margin-mobile md:px-margin py-space-xl md:py-20 grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+
+      <div class="lg:col-span-7 flex flex-col gap-space-md">
+        <span class="inline-flex items-center self-start gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-high font-label-sm text-label-sm text-primary uppercase tracking-wider">
+          <span class="relative flex w-2 h-2"><span class="absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75 animate-ping"></span><span class="relative inline-flex w-2 h-2 rounded-full bg-primary-container"></span></span>
+          Para principiantes · Clase en Discord
+        </span>
+        <h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface tracking-tight">
+          ¿Quieres empezar en Pentesting pero <span class="text-primary">no sabes por dónde?</span>
+        </h1>
+        <p class="font-body-lg text-body-md md:text-body-lg text-on-surface-variant max-w-[580px]">
+          Te doy una <strong class="text-on-surface font-semibold">ruta clara en 6 pasos</strong> para empezar en Hacking Ético sin perder meses saltando entre tutoriales.
+        </p>
+        <div class="pt-space-sm flex flex-col sm:flex-row gap-space-sm">
+          <a class="cta-glow inline-flex items-center justify-center gap-space-sm h-14 px-space-xl rounded-xl bg-primary-container text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-transform hover:-translate-y-0.5" href="#pago">
+            <span class="material-symbols-outlined text-[22px]">bolt</span>Acceder por US$10
+          </a>
+          <a class="inline-flex items-center justify-center gap-space-sm h-14 px-space-lg rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md uppercase tracking-wider hover:text-primary transition-colors" data-wa="hero-duda" data-wa-msg="Hola Team 01, tengo una duda sobre la clase de Pentesting de US$10: " href="#faq">
+            <svg aria-hidden="true" class="w-5 h-5"><use href="#i-wa"/></svg>Tengo una duda
+          </a>
+        </div>
+        <div class="flex items-center gap-space-sm pt-space-xs">
+          <img alt="Logo de juanicerouno" class="w-10 h-10 rounded-full object-cover shrink-0 ring-2 ring-primary-container/40" height="40" width="40" src="assets/logo-juan.webp"/>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Por <strong class="text-on-surface font-semibold">juanicerouno</strong> · contenido de hacking en
+            <a class="underline underline-offset-2 hover:text-primary" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank">YouTube</a>,
+            <a class="underline underline-offset-2 hover:text-primary" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank">Instagram</a> y
+            <a class="underline underline-offset-2 hover:text-primary" href="https://www.tiktok.com/@juani_silveira" rel="noopener noreferrer" target="_blank">TikTok</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 w-full">
+        <div class="rounded-xl bg-surface-container-low shadow-2xl overflow-hidden ring-1 ring-outline-variant/40">
+          <div class="h-10 px-space-md bg-surface-container-high flex items-center justify-between">
+            <span class="flex items-center gap-1.5" aria-hidden="true">
+              <span class="w-2.5 h-2.5 rounded-full bg-error"></span><span class="w-2.5 h-2.5 rounded-full bg-surface-bright"></span><span class="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim"></span>
+            </span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant truncate px-space-sm">juan@pentest-box:~/clase</span>
+            <span class="font-label-sm text-label-sm text-primary">bash</span>
+          </div>
+          <div id="terminal-log" class="p-space-md md:p-space-lg flex flex-col gap-space-sm font-label-sm text-label-sm" aria-label="Clase desde cero, en Discord. El horario se acuerda con Juan. US$10, pago único, USDT o BTC por la red BEP20.">
+            <p class="text-on-surface-variant"><span class="text-primary">root@juan01:~#</span> <span data-term-cmd>cat clase.txt</span></p>
+            <dl class="flex flex-col gap-y-space-sm p-space-md rounded-lg bg-surface-container-lowest">
+              <div data-term-row class="grid grid-cols-[80px_1fr] gap-x-space-md"><dt class="text-primary">NIVEL</dt><dd class="text-on-surface">Desde cero</dd></div>
+              <div data-term-row class="grid grid-cols-[80px_1fr] gap-x-space-md"><dt class="text-primary">DÓNDE</dt><dd class="text-on-surface">Discord</dd></div>
+              <div data-term-row class="grid grid-cols-[80px_1fr] gap-x-space-md"><dt class="text-primary">HORARIO</dt><dd class="text-on-surface">Lo acuerdas con Juan</dd></div>
+              <div data-term-row class="grid grid-cols-[80px_1fr] gap-x-space-md"><dt class="text-primary">PRECIO</dt><dd class="text-primary font-semibold">US$10 · pago único</dd></div>
+              <div data-term-row class="grid grid-cols-[80px_1fr] gap-x-space-md"><dt class="text-primary">PAGO</dt><dd class="text-on-surface">USDT / BTC · red BEP20</dd></div>
+            </dl>
+            <p class="text-on-surface-variant pt-space-xs"><span class="text-secondary-fixed">juan@box:~$</span> <span data-term-final>./acceder --pasos=3</span></p>
+          </div>
+          <script>
+            if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+              document.getElementById("terminal-log").classList.add("term-pending");
+            }
+          </script>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. PROBLEMA + RUTA -->
+  <section id="ruta" class="bg-surface py-space-xl md:py-16">
+    <div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin">
+      <div class="max-w-[720px] mb-space-lg">
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+          No te falta información. <span class="text-primary">Te falta orden.</span>
+        </h2>
+        <p class="text-on-surface-variant mt-space-sm">Videos sin orden, cientos de herramientas y metodologías que no encajan. Esta es la secuencia que sigo yo, del día cero en adelante:</p>
+      </div>
+
+      <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-sm md:gap-space-md">
+        <li class="flex gap-space-md p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <span class="font-label-lg text-label-lg text-primary shrink-0">01</span>
+          <div><h3 class="font-headline-sm text-headline-sm text-on-surface">Fundamentos</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Redes (TCP/IP, puertos, DNS) y terminal Linux.</p></div>
+        </li>
+        <li class="flex gap-space-md p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <span class="font-label-lg text-label-lg text-primary shrink-0">02</span>
+          <div><h3 class="font-headline-sm text-headline-sm text-on-surface">El entorno</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Cómo funcionan objetivos, servicios y protocolos.</p></div>
+        </li>
+        <li class="flex gap-space-md p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <span class="font-label-lg text-label-lg text-primary shrink-0">03</span>
+          <div><h3 class="font-headline-sm text-headline-sm text-on-surface">Herramientas</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Nmap, fuzzing y proxies: cuándo usar cada una.</p></div>
+        </li>
+        <li class="flex gap-space-md p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <span class="font-label-lg text-label-lg text-primary shrink-0">04</span>
+          <div><h3 class="font-headline-sm text-headline-sm text-on-surface">Metodología</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Reconocimiento, detección, análisis y documentación.</p></div>
+        </li>
+        <li class="flex gap-space-md p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <span class="font-label-lg text-label-lg text-primary shrink-0">05</span>
+          <div><h3 class="font-headline-sm text-headline-sm text-on-surface">Práctica legal</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1">TryHackMe, Hack The Box y VMs propias.</p></div>
+        </li>
+        <li class="flex gap-space-md p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <span class="font-label-lg text-label-lg text-primary shrink-0">06</span>
+          <div><h3 class="font-headline-sm text-headline-sm text-on-surface">Siguiente nivel</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Web, Red Team, Active Directory y certificaciones.</p></div>
+        </li>
+      </ol>
+
+      <div class="mt-space-lg grid grid-cols-1 md:grid-cols-2 gap-space-sm md:gap-space-md">
+        <div class="p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <p class="flex items-center gap-space-xs font-label-md text-label-md text-primary uppercase"><span class="material-symbols-outlined text-[18px]">check_circle</span>Es para ti si</p>
+          <p class="mt-space-xs text-on-surface-variant">Empiezas desde cero, viste muchos tutoriales y sigues sin saber qué estudiar primero.</p>
+        </div>
+        <div class="p-space-md md:p-space-lg rounded-xl bg-surface-container-low">
+          <p class="flex items-center gap-space-xs font-label-md text-label-md text-error uppercase"><span class="material-symbols-outlined text-[18px]">block</span>No es para ti si</p>
+          <p class="mt-space-xs text-on-surface-variant">Quieres entrar a cuentas o redes ajenas, o esperas ser profesional en una sola clase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ACCESO EN 3 PASOS -->
+  <section id="pago" class="bg-surface-container-lowest py-space-xl md:py-16">
+    <div class="max-w-[880px] mx-auto px-margin-mobile md:px-margin">
+      <div class="text-center mb-space-lg md:mb-space-xl">
+        <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">[ Acceso · pago único ]</span>
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight mt-space-xs">Accede en 3 pasos por <span class="text-primary">US$10</span></h2>
+        <p class="text-on-surface-variant mt-space-xs">Sin registros ni pasarelas. Pagas, me escribes y agendamos tu clase.</p>
+      </div>
+
+      <div id="cupos-panel" class="mb-space-lg rounded-xl bg-surface-container p-space-md md:p-space-lg flex flex-col gap-space-md">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-space-md">
+          <p class="font-label-lg text-label-lg uppercase tracking-wider text-on-surface">Quedan <span id="cupos-left" class="text-primary">10</span> de 10</p>
+          <p id="cupos-countdown-wrap" class="flex flex-col sm:items-end">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Para entrar a esta clase</span>
+            <span id="cupos-countdown" class="font-label-lg text-[22px] leading-none text-primary tracking-wider">07:00:00</span>
+          </p>
+        </div>
+        <div id="cupos-marks" class="grid grid-cols-10 gap-1" role="img" aria-label="Cupos de la clase"></div>
+      </div>
+
+      <div id="clase-llena" class="is-hidden rounded-xl bg-surface-container p-space-lg md:p-space-xl text-center flex flex-col items-center gap-space-md">
+        <span class="material-symbols-outlined text-primary text-[32px]">campaign</span>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Espera la próxima clase en los estados</h3>
+        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Ahí avisamos cuando abra la siguiente.</p>
+        <div class="w-full flex flex-col sm:flex-row gap-space-sm sm:justify-center">
+          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span>YouTube</a>
+          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span>Instagram</a>
+          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.tiktok.com/@juani_silveira" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">smart_display</span>TikTok</a>
+        </div>
+      </div>
+
+      <ol id="pasos-pago" class="relative flex flex-col gap-space-md">
+        <span aria-hidden="true" class="absolute left-[27px] md:left-[35px] top-10 bottom-10 w-px bg-outline-variant"></span>
+
+        <!-- Paso 1: wallet -->
+        <li class="relative rounded-xl bg-surface-container p-space-md md:p-space-lg ring-1 ring-primary-container/40 shadow-2xl">
+          <div class="flex items-start gap-space-md">
+            <span class="relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center font-label-lg text-label-lg shrink-0">1</span>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">Envía los US$10 a esta wallet</h3>
+              <p id="wallet-amount" class="font-body-sm text-body-sm text-on-surface-variant mt-1">Envía 10 USDT.</p>
+            </div>
+          </div>
+
+          <div class="mt-space-md flex gap-space-xs" role="tablist" aria-label="Elige la moneda">
+            <button class="flex-1 h-11 rounded-lg bg-primary-container text-on-primary-fixed font-label-md text-label-md uppercase tracking-wider" type="button" role="tab" id="tab-usdt" aria-selected="true" aria-controls="wallet-panel" data-wallet="usdt">USDT</button>
+            <button class="flex-1 h-11 rounded-lg bg-surface-container-high text-on-surface-variant font-label-md text-label-md uppercase tracking-wider hover:text-on-surface" type="button" role="tab" id="tab-btc" aria-selected="false" aria-controls="wallet-panel" data-wallet="btc">BTC</button>
+          </div>
+
+          <div id="wallet-panel" class="mt-space-md grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-space-md items-center" role="tabpanel" aria-labelledby="tab-usdt">
+            <div class="flex flex-col gap-space-sm min-w-0">
+              <div class="p-space-md rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant/60">
+                <div class="flex flex-wrap items-center justify-between gap-space-xs">
+                  <span id="wallet-token" class="font-label-sm text-label-sm text-on-surface uppercase">Tether (USDT)</span>
+                  <span id="wallet-network" class="px-space-sm py-0.5 rounded-lg bg-primary-container/15 font-label-sm text-label-sm text-primary">BEP20 · BNB Smart Chain</span>
+                </div>
+                <p id="wallet" class="font-label-lg text-[13px] md:text-label-lg text-on-surface break-all mt-space-sm select-all">0x70B330d176d40BA85dF884B48553601fCcFAbD16</p>
+              </div>
+              <button class="inline-flex items-center justify-center gap-space-sm h-12 rounded-xl bg-primary-container text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-colors hover:bg-primary-fixed-dim" data-copy="#wallet" type="button">
+                <span class="material-symbols-outlined text-[20px]" data-copy-icon>content_copy</span><span data-copy-label>Copiar dirección</span>
+              </button>
+              <p class="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-[18px] shrink-0">warning</span>
+                <span id="wallet-note">Usa <strong class="text-on-surface">solo la red BEP20</strong>. Si envías USDT por otra red, los fondos se pierden.</span>
+              </p>
+            </div>
+            <figure class="hidden sm:flex flex-col items-center gap-space-xs">
+              <img id="wallet-qr" alt="Código QR para enviar 10 USDT por BEP20" class="w-36 h-36 rounded-lg object-cover" height="144" width="144" src="assets/QR_USDT.jpeg"/>
+              <figcaption id="wallet-qr-caption" class="font-label-sm text-label-sm text-on-surface-variant">QR de USDT</figcaption>
+            </figure>
+          </div>
+        </li>
+
+        <!-- Paso 2: comprobante -->
+        <li class="relative rounded-xl bg-surface-container-low p-space-md md:p-space-lg">
+          <div class="flex items-start gap-space-md">
+            <span class="relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-label-lg text-label-lg shrink-0">2</span>
+            <div class="flex-1">
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">Envía el comprobante por WhatsApp</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">El mensaje ya va escrito: solo adjunta la captura de la transacción.</p>
+              <a class="cta-glow mt-space-md w-full sm:w-auto inline-flex items-center justify-center gap-space-sm h-12 px-space-lg rounded-xl bg-primary-container text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-colors hover:bg-primary-fixed-dim" data-wa="comprobante" data-wa-msg="Hola Team 01, ya envié los US$10 por BEP20 para la clase de Pentesting. Te adjunto el comprobante." href="#pago">
+                <svg aria-hidden="true" class="w-5 h-5"><use href="#i-wa"/></svg>Enviar comprobante
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Paso 3: acceso + horario -->
+        <li class="relative rounded-xl bg-surface-container-low p-space-md md:p-space-lg">
+          <div class="flex items-start gap-space-md">
+            <span class="relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center font-label-lg text-label-lg shrink-0">3</span>
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">Recibe tu acceso y agenda tu clase</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Te doy el acceso a Discord y acordamos el horario de la clase directamente contigo.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <p id="pago-otro" class="mt-space-lg text-center font-body-sm text-body-sm text-on-surface-variant">
+        ¿No tienes cripto?
+        <a class="inline-flex items-center gap-space-xs font-semibold text-primary hover:underline underline-offset-4" data-wa="sin-cripto" data-wa-msg="Hola Team 01, quiero la clase de Pentesting de US$10 pero no tengo cripto. ¿Qué otro medio de pago puedo usar?" href="#pago">
+          <svg aria-hidden="true" class="w-4 h-4"><use href="#i-wa"/></svg>Consulta otro medio de pago
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. FAQ -->
+  <section id="faq" class="bg-surface py-space-xl md:py-16">
+    <div class="max-w-[760px] mx-auto px-margin-mobile md:px-margin">
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight text-center mb-space-lg">Preguntas frecuentes</h2>
+      <div class="flex flex-col gap-space-sm">
+        <details class="rounded-xl bg-surface-container-low">
+          <summary class="flex items-center justify-between gap-space-md p-space-md md:p-space-lg font-label-lg text-label-lg text-on-surface">¿Necesito experiencia previa?<span class="chevron material-symbols-outlined text-on-surface-variant transition-transform shrink-0">expand_more</span></summary>
+          <p class="px-space-md md:px-space-lg pb-space-md md:pb-space-lg text-on-surface-variant">No. Empezamos por fundamentos de redes y Linux.</p>
+        </details>
+        <details class="rounded-xl bg-surface-container-low">
+          <summary class="flex items-center justify-between gap-space-md p-space-md md:p-space-lg font-label-lg text-label-lg text-on-surface">¿Cuándo es la clase?<span class="chevron material-symbols-outlined text-on-surface-variant transition-transform shrink-0">expand_more</span></summary>
+          <p class="px-space-md md:px-space-lg pb-space-md md:pb-space-lg text-on-surface-variant">Cuando confirmo tu pago, acordamos el horario por WhatsApp y te paso el acceso a Discord.</p>
+        </details>
+        <details class="rounded-xl bg-surface-container-low">
+          <summary class="flex items-center justify-between gap-space-md p-space-md md:p-space-lg font-label-lg text-label-lg text-on-surface">¿Me equivoqué de red al enviar, qué hago?<span class="chevron material-symbols-outlined text-on-surface-variant transition-transform shrink-0">expand_more</span></summary>
+          <p class="px-space-md md:px-space-lg pb-space-md md:pb-space-lg text-on-surface-variant">Las transacciones cripto no se pueden revertir. Revisa que sea BEP20 antes de enviar y, si dudas, escríbeme primero.</p>
+        </details>
+        <details class="rounded-xl bg-surface-container-low">
+          <summary class="flex items-center justify-between gap-space-md p-space-md md:p-space-lg font-label-lg text-label-lg text-on-surface">¿Incluye certificado?<span class="chevron material-symbols-outlined text-on-surface-variant transition-transform shrink-0">expand_more</span></summary>
+          <p class="px-space-md md:px-space-lg pb-space-md md:pb-space-lg text-on-surface-variant">No. Es una ruta para empezar con dirección; al final te oriento sobre qué certificaciones buscar.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CIERRE -->
+  <section id="cta-final" class="relative overflow-hidden bg-surface-container-lowest py-space-xl md:py-20">
+    <img alt="" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full object-cover object-center" src="assets/Footer.gif"/>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-surface-container-lowest/65"></div>
+    <div class="relative z-10 max-w-[760px] mx-auto px-margin-mobile md:px-margin text-center flex flex-col items-center gap-space-md">
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+        Deja de buscar. <span class="text-primary">Empieza con una ruta.</span>
+      </h2>
+      <a class="w-full sm:w-auto inline-flex items-center justify-center gap-space-sm h-14 px-space-xl rounded-xl bg-primary-container text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-transform hover:-translate-y-0.5" href="#pago">
+        <span class="material-symbols-outlined text-[22px]">bolt</span>Acceder por US$10
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bg-surface-container-lowest border-t border-outline-variant/40 pb-24 md:pb-0">
+  <div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-sm text-center md:text-left">
+    <span class="font-body-sm text-body-sm text-on-surface-variant">Contenido educativo de hacking ético. Practica solo en entornos autorizados.</span>
+    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">© <span data-year></span> juanicerouno</span>
+  </div>
+</footer>
+
+<!-- Barra fija móvil: visible fuera del hero, del bloque de pago y del cierre -->
+<div id="sticky-cta" class="md:hidden fixed inset-x-0 bottom-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md px-margin-mobile pt-space-sm pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.6)]">
+  <div class="flex items-center gap-space-sm">
+    <a class="flex-1 inline-flex items-center justify-center gap-space-xs h-12 rounded-xl bg-primary-container text-on-primary-fixed font-label-md text-label-md uppercase tracking-wider" href="#pago">
+      <span class="material-symbols-outlined text-[18px]" data-sticky-icon>account_balance_wallet</span><span data-sticky-label>Acceder · US$10</span>
+    </a>
+    <a aria-label="Escribir por WhatsApp" class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-surface-container-high text-primary" data-wa="sticky" href="#pago">
+      <svg aria-hidden="true" class="w-6 h-6"><use href="#i-wa"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  const CUPOS_OCUPADOS = 4; // 0 a 10. 10 = clase llena
+
+  const WHATSAPP_CONFIG = {
+    phone: "5491162488944",
+    message: "Hola Team 01, quiero acceder a la clase de Pentesting de US$10."
+  };
+
+  // Cambia aquí la dirección, la red o el QR de cada moneda.
+  const WALLETS = {
+    usdt: {
+      token: "Tether (USDT)",
+      network: "BEP20 · BNB Smart Chain",
+      address: "0x70B330d176d40BA85dF884B48553601fCcFAbD16",
+      amount: "Envía 10 USDT.",
+      note: 'Usa <strong class="text-on-surface">solo la red BEP20</strong>. Si envías USDT por otra red, los fondos se pierden.',
+      qr: "assets/QR_USDT.jpeg",
+      qrAlt: "Código QR para enviar 10 USDT por BEP20",
+      qrCaption: "QR de 10 USDT",
+      wa: "Hola Team 01, ya envié 10 USDT por la red BEP20 para la clase de Pentesting. Te adjunto el comprobante."
+    },
+    btc: {
+      token: "Bitcoin (BTC)",
+      network: "BEP20 · BNB Smart Chain",
+      address: "0x70B330d176d40BA85dF884B48553601fCcFAbD16",
+      amount: "Envía el equivalente a US$10 en BTC. No envíes 10 BTC.",
+      note: 'En BEP20 el BTC llega como token (BTCB). Envía <strong class="text-on-surface">solo el equivalente a US$10</strong> y únicamente por esa red.',
+      qr: "assets/QR_BTC.jpeg",
+      qrAlt: "Código QR para enviar BTC por BEP20",
+      qrCaption: "QR de BTC",
+      wa: "Hola Team 01, ya envié el equivalente a US$10 en BTC por la red BEP20 para la clase de Pentesting. Te adjunto el comprobante."
     }
-  </script>
+  };
+
+  const walletAddress = document.getElementById("wallet");
+  const walletTabs = document.querySelectorAll("[data-wallet]");
+  const proofLink = document.querySelector('[data-wa="comprobante"]');
+
+  function showWallet(key) {
+    const wallet = WALLETS[key];
+    document.getElementById("wallet-amount").textContent = wallet.amount;
+    document.getElementById("wallet-token").textContent = wallet.token;
+    document.getElementById("wallet-network").textContent = wallet.network;
+    document.getElementById("wallet-note").innerHTML = wallet.note;
+    walletAddress.textContent = wallet.address;
+    const qr = document.getElementById("wallet-qr");
+    qr.src = wallet.qr;
+    qr.alt = wallet.qrAlt;
+    document.getElementById("wallet-qr-caption").textContent = wallet.qrCaption;
+    document.getElementById("wallet-panel").setAttribute("aria-labelledby", "tab-" + key);
+    if (proofLink) {
+      proofLink.dataset.waMsg = wallet.wa;
+      proofLink.href = waUrl(wallet.wa);
+    }
+    walletTabs.forEach((tab) => {
+      const active = tab.dataset.wallet === key;
+      tab.setAttribute("aria-selected", String(active));
+      tab.classList.toggle("bg-primary-container", active);
+      tab.classList.toggle("text-on-primary-fixed", active);
+      tab.classList.toggle("bg-surface-container-high", !active);
+      tab.classList.toggle("text-on-surface-variant", !active);
+    });
+  }
+
+  walletTabs.forEach((tab) => tab.addEventListener("click", () => showWallet(tab.dataset.wallet)));
+
+  const waUrl = (msg) => `https://wa.me/${WHATSAPP_CONFIG.phone}?text=${encodeURIComponent(msg)}`;
+
+  document.querySelectorAll("[data-wa]").forEach((el) => {
+    el.href = waUrl(el.dataset.waMsg || WHATSAPP_CONFIG.message);
+    el.target = "_blank";
+    el.rel = "noopener";
+    el.addEventListener("click", () => {
+      (window.dataLayer = window.dataLayer || []).push({ event: "whatsapp_click", wa_cta: el.dataset.wa });
+    });
+  });
+
+  showWallet("usdt");
+
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    const label = btn.querySelector("[data-copy-label]");
+    const icon = btn.querySelector("[data-copy-icon]");
+    const original = label.textContent;
+    btn.addEventListener("click", async () => {
+      const text = document.querySelector(btn.dataset.copy).textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = Object.assign(document.createElement("textarea"), { value: text });
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      (window.dataLayer = window.dataLayer || []).push({ event: "wallet_copy" });
+      label.textContent = "¡Copiada! Ahora envía US$10";
+      icon.textContent = "done";
+      setTimeout(() => { label.textContent = original; icon.textContent = "content_copy"; }, 2500);
+    });
+  });
+
+  const stickyBar = document.getElementById("sticky-cta");
+  const inView = new Set();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => (e.isIntersecting ? inView.add(e.target) : inView.delete(e.target)));
+    stickyBar.classList.toggle("is-visible", inView.size === 0);
+  });
+  ["inicio", "pago", "cta-final"].forEach((id) => observer.observe(document.getElementById(id)));
+
+  document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  const cuposOcupados = Math.min(10, Math.max(0, Number(CUPOS_OCUPADOS) || 0));
+  const cuposDisponibles = 10 - cuposOcupados;
+  const claseLlena = cuposOcupados >= 10;
+  const cuposLeft = document.getElementById("cupos-left");
+  const cuposMarks = document.getElementById("cupos-marks");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (cuposLeft) cuposLeft.textContent = String(cuposDisponibles);
+  if (cuposMarks) {
+    cuposMarks.setAttribute("aria-label", `Quedan ${cuposDisponibles} de 10 cupos`);
+    for (let i = 0; i < 10; i += 1) {
+      const mark = document.createElement("span");
+      mark.className = "cupo-mark";
+      cuposMarks.appendChild(mark);
+      if (i < cuposOcupados) {
+        const turnOn = () => mark.classList.add("is-on");
+        if (reduceMotion) turnOn();
+        else setTimeout(turnOn, 120 + i * 90);
+      }
+    }
+  }
+
+  const countdownWrap = document.getElementById("cupos-countdown-wrap");
+  if (claseLlena) {
+    countdownWrap?.classList.add("is-hidden");
+    document.getElementById("pasos-pago")?.classList.add("is-hidden");
+    document.getElementById("pago-otro")?.classList.add("is-hidden");
+    document.getElementById("clase-llena")?.classList.remove("is-hidden");
+    const stickyLabel = document.querySelector("[data-sticky-label]");
+    const stickyIcon = document.querySelector("[data-sticky-icon]");
+    if (stickyLabel) stickyLabel.textContent = "Próxima clase";
+    if (stickyIcon) stickyIcon.textContent = "campaign";
+  } else if (countdownWrap) {
+    const COUNTDOWN_KEY = "clase-countdown-end";
+    const sevenHours = 7 * 60 * 60 * 1000;
+    let endsAt = Number(localStorage.getItem(COUNTDOWN_KEY));
+    if (!endsAt) {
+      endsAt = Date.now() + sevenHours;
+      localStorage.setItem(COUNTDOWN_KEY, String(endsAt));
+    }
+    const clock = document.getElementById("cupos-countdown");
+    const paintClock = () => {
+      const left = Math.max(0, endsAt - Date.now());
+      const total = Math.floor(left / 1000);
+      const hh = String(Math.floor(total / 3600)).padStart(2, "0");
+      const mm = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
+      const ss = String(total % 60).padStart(2, "0");
+      if (clock) clock.textContent = `${hh}:${mm}:${ss}`;
+      return left;
+    };
+    if (paintClock() > 0) {
+      const timer = setInterval(() => {
+        if (paintClock() <= 0) clearInterval(timer);
+      }, 1000);
+    }
+  }
+
+  const terminalLog = document.getElementById("terminal-log");
+  if (terminalLog && terminalLog.classList.contains("term-pending")) {
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const typeInto = (el, text) => new Promise((resolve) => {
+      let i = 0;
+      el.classList.add("term-caret");
+      const step = () => {
+        el.textContent = text.slice(0, i);
+        if (i < text.length) {
+          i += 1;
+          setTimeout(step, 70);
+        } else {
+          el.classList.remove("term-caret");
+          resolve();
+        }
+      };
+      step();
+    });
+
+    const cmd = terminalLog.querySelector("[data-term-cmd]");
+    const finalCmd = terminalLog.querySelector("[data-term-final]");
+    const cmdText = cmd.textContent;
+    const finalText = finalCmd.textContent;
+    cmd.textContent = "";
+    finalCmd.textContent = "";
+
+    (async () => {
+      await wait(700);
+      await typeInto(cmd, cmdText);
+      await wait(400);
+      for (const row of terminalLog.querySelectorAll("[data-term-row]")) {
+        row.style.display = "grid";
+        await wait(380);
+      }
+      await wait(450);
+      await typeInto(finalCmd, finalText);
+      finalCmd.classList.add("term-caret");
+    })();
+  }
+</script>
 </body>
 </html>
 
