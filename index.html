@@ -239,9 +239,9 @@ tailwind.config={darkMode:"class",theme:{extend:{
 
       <div id="clase-llena" class="is-hidden rounded-xl bg-surface-container p-space-lg md:p-space-xl text-center flex flex-col items-center gap-space-md">
         <span class="material-symbols-outlined text-primary text-[32px]">campaign</span>
-        <!-- Aquí está el nuevo mensaje de Inscripciones abiertas próximamente -->
+        <!-- Mensaje actualizado para indicar que pronto se abrirán inscripciones -->
         <h3 class="font-headline-sm text-headline-sm text-on-surface">¡Inscripciones abiertas próximamente!</h3>
-        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Sígueme en mis redes para enterarte cuando se abran nuevas inscripciones.</p>
+        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Sígueme en redes sociales para enterarte apenas se abran nuevos lugares.</p>
         <div class="w-full flex flex-col sm:flex-row gap-space-sm sm:justify-center">
           <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span>YouTube</a>
           <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span>Instagram</a>
@@ -387,24 +387,14 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </div>
 
 <script>
-  // =========================================================================
-  // =========================================================================
-  //
-  // PARA ABRIR O CERRAR INSCRIPCIONES:
-  // Cambia este número. 
-  // - Si pones 10, se cerrarán las inscripciones y mostrará el mensaje "¡Inscripciones abiertas próximamente!".
-  // - Si pones menos de 10 (ej: 4, 0, 9), mostrará los pasos para pagar.
-  //
-  // =========================================================================
-  // =========================================================================
-  const CUPOS_OCUPADOS = 10; 
+  // Cambia este número a 10 para cerrar inscripciones y mostrar "Próximamente"
+  const CUPOS_OCUPADOS = 4; // 0 a 10. 10 = clase llena
 
   const WHATSAPP_CONFIG = {
     phone: "5491162488944",
     message: "Hola Team 01, quiero acceder a la clase de Pentesting de US$10."
   };
 
-  // Cambia aquí la dirección, la red o el QR de cada moneda.
   const WALLETS = {
     usdt: {
       token: "Tether (USDT)",
@@ -414,7 +404,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
       note: 'Usa <strong class="text-on-surface">solo la red BEP20</strong>. Si envías USDT por otra red, los fondos se pierden.',
       qr: "assets/QR_USDT.jpeg",
       qrAlt: "Código QR para enviar 10 USDT por BEP20",
-      qrCaption: "QR de 10 USDT",
+      qrCaption: "QR de USDT",
       wa: "Hola Team 01, ya envié 10 USDT por la red BEP20 para la clase de Pentesting. Te adjunto el comprobante."
     },
     btc: {
@@ -606,7 +596,4 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </script>
 </body>
 </html>
-
-
-
 
