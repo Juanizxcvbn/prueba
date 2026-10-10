@@ -239,8 +239,9 @@ tailwind.config={darkMode:"class",theme:{extend:{
 
       <div id="clase-llena" class="is-hidden rounded-xl bg-surface-container p-space-lg md:p-space-xl text-center flex flex-col items-center gap-space-md">
         <span class="material-symbols-outlined text-primary text-[32px]">campaign</span>
-        <h3 class="font-headline-sm text-headline-sm text-on-surface">Espera la próxima clase en los estados</h3>
-        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Ahí avisamos cuando abra la siguiente.</p>
+        <!-- Aquí está el nuevo mensaje de Inscripciones abiertas próximamente -->
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">¡Inscripciones abiertas próximamente!</h3>
+        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Sígueme en mis redes para enterarte cuando se abran nuevas inscripciones.</p>
         <div class="w-full flex flex-col sm:flex-row gap-space-sm sm:justify-center">
           <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span>YouTube</a>
           <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span>Instagram</a>
@@ -386,7 +387,17 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </div>
 
 <script>
-  const CUPOS_OCUPADOS = 4; // 0 a 10. 10 = clase llena
+  // =========================================================================
+  // =========================================================================
+  //
+  // PARA ABRIR O CERRAR INSCRIPCIONES:
+  // Cambia este número. 
+  // - Si pones 10, se cerrarán las inscripciones y mostrará el mensaje "¡Inscripciones abiertas próximamente!".
+  // - Si pones menos de 10 (ej: 4, 0, 9), mostrará los pasos para pagar.
+  //
+  // =========================================================================
+  // =========================================================================
+  const CUPOS_OCUPADOS = 10; 
 
   const WHATSAPP_CONFIG = {
     phone: "5491162488944",
@@ -480,7 +491,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
         ta.remove();
       }
       (window.dataLayer = window.dataLayer || []).push({ event: "wallet_copy" });
-      label.textContent = "¡Copiada! Ahora envía US$10";
+      label.textContent = "¡Copiada! Ahora envía US\$10";
       icon.textContent = "done";
       setTimeout(() => { label.textContent = original; icon.textContent = "content_copy"; }, 2500);
     });
@@ -526,7 +537,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
     document.getElementById("clase-llena")?.classList.remove("is-hidden");
     const stickyLabel = document.querySelector("[data-sticky-label]");
     const stickyIcon = document.querySelector("[data-sticky-icon]");
-    if (stickyLabel) stickyLabel.textContent = "Próxima clase";
+    if (stickyLabel) stickyLabel.textContent = "Próximamente";
     if (stickyIcon) stickyIcon.textContent = "campaign";
   } else if (countdownWrap) {
     const COUNTDOWN_KEY = "clase-countdown-end";
@@ -595,7 +606,6 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </script>
 </body>
 </html>
-
 
 
 
