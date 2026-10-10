@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" href="assets/logo-juan.webp"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script id="tailwind-config">
 tailwind.config={darkMode:"class",theme:{extend:{
@@ -226,6 +226,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
         <p class="text-on-surface-variant mt-space-xs">Sin registros ni pasarelas. Pagas, me escribes y agendamos tu clase.</p>
       </div>
 
+      <!-- CONTENEDOR ABIERTO: Panel de cupos -->
       <div id="cupos-panel" class="mb-space-lg rounded-xl bg-surface-container p-space-md md:p-space-lg flex flex-col gap-space-md">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-space-md">
           <p class="font-label-lg text-label-lg uppercase tracking-wider text-on-surface">Quedan <span id="cupos-left" class="text-primary">10</span> de 10</p>
@@ -237,17 +238,19 @@ tailwind.config={darkMode:"class",theme:{extend:{
         <div id="cupos-marks" class="grid grid-cols-10 gap-1" role="img" aria-label="Cupos de la clase"></div>
       </div>
 
+      <!-- CONTENEDOR CERRADO (Sold out): Por defecto está oculto (is-hidden) -->
       <div id="clase-llena" class="is-hidden rounded-xl bg-surface-container p-space-lg md:p-space-xl text-center flex flex-col items-center gap-space-md">
-        <span class="material-symbols-outlined text-primary text-[32px]">campaign</span>
-        <h3 class="font-headline-sm text-headline-sm text-on-surface">Espera la próxima clase en los estados</h3>
-        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Ahí avisamos cuando abra la siguiente.</p>
-        <div class="w-full flex flex-col sm:flex-row gap-space-sm sm:justify-center">
-          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span>YouTube</a>
-          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span>Instagram</a>
-          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.tiktok.com/@juani_silveira" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">smart_display</span>TikTok</a>
+        <span class="material-symbols-outlined text-primary text-[32px]">lock</span>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Inscripciones cerradas</h3>
+        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta edición ya han sido tomados. Se abrirán inscripciones próximamente.</p>
+        <div class="w-full flex flex-col sm:flex-row gap-space-sm sm:justify-center mt-2">
+          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase transition-colors" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span>YouTube</a>
+          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase transition-colors" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span>Instagram</a>
+          <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase transition-colors" href="https://www.tiktok.com/@juani_silveira" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">smart_display</span>TikTok</a>
         </div>
       </div>
 
+      <!-- CONTENEDOR ABIERTO: Pasos de pago -->
       <ol id="pasos-pago" class="relative flex flex-col gap-space-md">
         <span aria-hidden="true" class="absolute left-[27px] md:left-[35px] top-10 bottom-10 w-px bg-outline-variant"></span>
 
@@ -386,14 +389,17 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </div>
 
 <script>
-  const CUPOS_OCUPADOS = 10; // 0 a 10. 10 = clase llena
+  // =====================================================================
+  // 1. CONSTANTE DE ESTADO
+  // Cambia este valor a 10 para activar el estado "Inscripciones cerradas"
+  // =====================================================================
+  const CUPOS_OCUPADOS = 4;
 
   const WHATSAPP_CONFIG = {
     phone: "5491162488944",
     message: "Hola Team 01, quiero acceder a la clase de Pentesting de US$10."
   };
 
-  // Cambia aquí la dirección, la red o el QR de cada moneda.
   const WALLETS = {
     usdt: {
       token: "Tether (USDT)",
@@ -480,7 +486,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
         ta.remove();
       }
       (window.dataLayer = window.dataLayer || []).push({ event: "wallet_copy" });
-      label.textContent = "¡Copiada! Ahora envía US$10";
+      label.textContent = "¡Copiada! Ahora envía US\$10";
       icon.textContent = "done";
       setTimeout(() => { label.textContent = original; icon.textContent = "content_copy"; }, 2500);
     });
@@ -496,14 +502,22 @@ tailwind.config={darkMode:"class",theme:{extend:{
 
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
+  // =====================================================================
+  // 2. LÓGICA DEL SISTEMA DE CUPOS Y CIERRE
+  // =====================================================================
   const cuposOcupados = Math.min(10, Math.max(0, Number(CUPOS_OCUPADOS) || 0));
   const cuposDisponibles = 10 - cuposOcupados;
   const claseLlena = cuposOcupados >= 10;
+  
   const cuposLeft = document.getElementById("cupos-left");
   const cuposMarks = document.getElementById("cupos-marks");
+  const countdownWrap = document.getElementById("cupos-countdown-wrap");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Actualiza el texto de cupos
   if (cuposLeft) cuposLeft.textContent = String(cuposDisponibles);
+  
+  // Dibuja la barra de progreso
   if (cuposMarks) {
     cuposMarks.setAttribute("aria-label", `Quedan ${cuposDisponibles} de 10 cupos`);
     for (let i = 0; i < 10; i += 1) {
@@ -518,17 +532,22 @@ tailwind.config={darkMode:"class",theme:{extend:{
     }
   }
 
-  const countdownWrap = document.getElementById("cupos-countdown-wrap");
+  // Lógica de visualización Estado Abierto vs Cerrado
   if (claseLlena) {
+    // ESTADO CERRADO: Oculta panel de pago y contador
     countdownWrap?.classList.add("is-hidden");
     document.getElementById("pasos-pago")?.classList.add("is-hidden");
     document.getElementById("pago-otro")?.classList.add("is-hidden");
+    // Muestra el mensaje de Sold Out
     document.getElementById("clase-llena")?.classList.remove("is-hidden");
+    
+    // Cambia el comportamiento y diseño de la barra inferior sticky en móvil
     const stickyLabel = document.querySelector("[data-sticky-label]");
     const stickyIcon = document.querySelector("[data-sticky-icon]");
-    if (stickyLabel) stickyLabel.textContent = "Próxima clase";
-    if (stickyIcon) stickyIcon.textContent = "campaign";
+    if (stickyLabel) stickyLabel.textContent = "Inscripciones cerradas";
+    if (stickyIcon) stickyIcon.textContent = "lock";
   } else if (countdownWrap) {
+    // ESTADO ABIERTO: Lógica de cuenta regresiva
     const COUNTDOWN_KEY = "clase-countdown-end";
     const sevenHours = 7 * 60 * 60 * 1000;
     let endsAt = Number(localStorage.getItem(COUNTDOWN_KEY));
@@ -553,6 +572,9 @@ tailwind.config={darkMode:"class",theme:{extend:{
     }
   }
 
+  // =====================================================================
+  // Animación de la terminal
+  // =====================================================================
   const terminalLog = document.getElementById("terminal-log");
   if (terminalLog && terminalLog.classList.contains("term-pending")) {
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -594,6 +616,5 @@ tailwind.config={darkMode:"class",theme:{extend:{
   }
 </script>
 </body>
-</html>
 </html>
 
