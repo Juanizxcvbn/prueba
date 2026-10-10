@@ -239,9 +239,8 @@ tailwind.config={darkMode:"class",theme:{extend:{
 
       <div id="clase-llena" class="is-hidden rounded-xl bg-surface-container p-space-lg md:p-space-xl text-center flex flex-col items-center gap-space-md">
         <span class="material-symbols-outlined text-primary text-[32px]">campaign</span>
-        <!-- Mensaje actualizado para indicar que pronto se abrirán inscripciones -->
-        <h3 class="font-headline-sm text-headline-sm text-on-surface">¡Inscripciones abiertas próximamente!</h3>
-        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Sígueme en redes sociales para enterarte apenas se abran nuevos lugares.</p>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Espera la próxima clase en los estados</h3>
+        <p class="text-on-surface-variant max-w-[460px]">Los 10 cupos de esta clase ya están tomados. Ahí avisamos cuando abra la siguiente.</p>
         <div class="w-full flex flex-col sm:flex-row gap-space-sm sm:justify-center">
           <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.youtube.com/@Juanicerouno?sub_confirmation=1" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span>YouTube</a>
           <a class="inline-flex items-center justify-center gap-space-xs h-12 px-space-md rounded-xl bg-surface-container-high text-on-surface hover:text-primary font-label-md text-label-md uppercase" href="https://www.instagram.com/juanicerouno/reels/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span>Instagram</a>
@@ -387,7 +386,6 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </div>
 
 <script>
-  // Cambia este número a 10 para cerrar inscripciones y mostrar "Próximamente"
   const CUPOS_OCUPADOS = 4; // 0 a 10. 10 = clase llena
 
   const WHATSAPP_CONFIG = {
@@ -395,6 +393,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
     message: "Hola Team 01, quiero acceder a la clase de Pentesting de US$10."
   };
 
+  // Cambia aquí la dirección, la red o el QR de cada moneda.
   const WALLETS = {
     usdt: {
       token: "Tether (USDT)",
@@ -404,7 +403,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
       note: 'Usa <strong class="text-on-surface">solo la red BEP20</strong>. Si envías USDT por otra red, los fondos se pierden.',
       qr: "assets/QR_USDT.jpeg",
       qrAlt: "Código QR para enviar 10 USDT por BEP20",
-      qrCaption: "QR de USDT",
+      qrCaption: "QR de 10 USDT",
       wa: "Hola Team 01, ya envié 10 USDT por la red BEP20 para la clase de Pentesting. Te adjunto el comprobante."
     },
     btc: {
@@ -481,7 +480,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
         ta.remove();
       }
       (window.dataLayer = window.dataLayer || []).push({ event: "wallet_copy" });
-      label.textContent = "¡Copiada! Ahora envía US\$10";
+      label.textContent = "¡Copiada! Ahora envía US$10";
       icon.textContent = "done";
       setTimeout(() => { label.textContent = original; icon.textContent = "content_copy"; }, 2500);
     });
@@ -527,7 +526,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
     document.getElementById("clase-llena")?.classList.remove("is-hidden");
     const stickyLabel = document.querySelector("[data-sticky-label]");
     const stickyIcon = document.querySelector("[data-sticky-icon]");
-    if (stickyLabel) stickyLabel.textContent = "Próximamente";
+    if (stickyLabel) stickyLabel.textContent = "Próxima clase";
     if (stickyIcon) stickyIcon.textContent = "campaign";
   } else if (countdownWrap) {
     const COUNTDOWN_KEY = "clase-countdown-end";
@@ -595,5 +594,6 @@ tailwind.config={darkMode:"class",theme:{extend:{
   }
 </script>
 </body>
+</html>
 </html>
 
