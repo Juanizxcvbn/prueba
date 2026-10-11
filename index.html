@@ -216,7 +216,38 @@ tailwind.config={darkMode:"class",theme:{extend:{
       </div>
     </div>
   </section>
+  
+<!-- TESTIMONIOS -->
+<section id="testimonios" class="bg-surface-container-low py-space-xl md:py-16">
+  <div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin">
+    <div class="max-w-[720px] mb-space-lg">
+      <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">[ Alumnos ]</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight mt-space-xs">
+        Lo que dicen <span class="text-primary">quienes ya hicieron la clase</span>
+      </h2>
+    </div>
 
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-sm md:gap-space-md">
+      <figure class="rounded-xl bg-surface-container overflow-hidden ring-1 ring-outline-variant/40">
+        <img src="assets/testimonio-1.webp" alt="Mensaje de un alumno sobre la clase" loading="lazy" width="600" height="800" class="w-full h-auto"/>
+      </figure>
+      <figure class="rounded-xl bg-surface-container overflow-hidden ring-1 ring-outline-variant/40">
+        <img src="assets/testimonio-2.webp" alt="Mensaje de un alumno sobre la clase" loading="lazy" width="600" height="800" class="w-full h-auto"/>
+      </figure>
+      <figure class="rounded-xl bg-surface-container overflow-hidden ring-1 ring-outline-variant/40">
+        <img src="assets/testimonio-3.webp" alt="Mensaje de un alumno sobre la clase" loading="lazy" width="600" height="800" class="w-full h-auto"/>
+      </figure>
+    </div>
+
+    <div class="mt-space-lg flex justify-center">
+      <a class="inline-flex items-center justify-center gap-space-sm h-14 px-space-xl rounded-xl bg-primary-container text-on-primary-fixed font-label-lg text-label-lg uppercase tracking-wider transition-transform hover:-translate-y-0.5" href="#pago">
+        <span class="material-symbols-outlined text-[22px]">bolt</span>Acceder por US$10
+      </a>
+    </div>
+  </div>
+</section>
+  
+  
   <!-- 3. ACCESO EN 3 PASOS -->
   <section id="pago" class="bg-surface-container-lowest py-space-xl md:py-16">
     <div class="max-w-[880px] mx-auto px-margin-mobile md:px-margin">
@@ -386,7 +417,7 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </div>
 
 <script>
-  const CUPOS_OCUPADOS = 10; // 0 a 10. 10 = clase llena
+  const CUPOS_OCUPADOS = 4; // 0 a 10. 10 = clase llena
 
   const WHATSAPP_CONFIG = {
     phone: "5491162488944",
@@ -595,4 +626,3 @@ tailwind.config={darkMode:"class",theme:{extend:{
 </script>
 </body>
 </html>
-
